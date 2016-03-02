@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Serial Connect</title>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    
+    <script>
+
+    function map_range(value, low1, high1, low2, high2) {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+    }
+
+    var socket = io.connect('//localhost:3000');
+    socket.on('data', function(data) {
+        console.log(data);
+        $('#name').text(data.val[0]);
+        $('#val').text(data.val[1]);
+        $('#mapped').text(Math.round(map_range(data.val[1],0,1,0,255)));
+    });
+    socket.on('error', function() {
+        console.error(arguments)
+    });
+    </script>
+</head>
+
+<body>
+
+<h1 id="name"></h1>
+<h1 id="val"></h1>
+<h1 id="mapped"></h1>
+
+</body>
+
+</html>
