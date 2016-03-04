@@ -15,9 +15,8 @@
     var socket = io.connect('//localhost:3000');
     socket.on('data', function(data) {
         console.log(data);
-        $('#name').text(data.val[0]);
-        $('#val').text(data.val[1]);
-        $('#mapped').text(map_range(data.val[1],0,1,0,255));
+        $('#name').text(data.val);
+
     });
     socket.on('error', function() {
         console.error(arguments)
@@ -28,8 +27,7 @@
 <body>
 
 <h1 id="name"></h1>
-<h1 id="val"></h1>
-<h1 id="mapped"></h1>
+
 
 </body>
 

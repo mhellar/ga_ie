@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Interactive Environments</title>
+    <meta name="description" content="Interactive Environments 2">
+    <meta name="author" content="Mark Hellar">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/league.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+                <section>
+                <section data-background="img/huzzah.jpg">
+                </section>
+               
+            
+                <section>
+                <a href="https://learn.adafruit.com/adafruit-huzzah-esp8266-breakout/using-arduino-ide">Set Up Arduino for tHE ESP8266</a>
+                </section>
+
+                <section>
+                <p>Go to Sketch->Include Libraries->Manage Libraries</p><br>
+                <p>Intall the ESP8266 and the Adafruit ESP66 Libraries</p>
+                </section>
+
+                <section>
+                <p>We have to Program the Huzzah in a special Way</p><br>
+                <img src="img/connect.jpeg">
+                <p>We have to Program the Huzzah in a special Way</p>
+                </section>
+
+                <section>
+                <p>After connecting we have to hold down the Left button, press the right button and let go of the left</p><br>
+                <img src="img/connect.jpeg">
+                </section>
+
+
+                 <section>
+                <p>The Huzzah is a mini Arduino with Wifi, that is $10.00!</p><br>
+                </section>
+                 <section>
+                <p>Connect an led</p><br>
+                <img src="img/led.png"><br>
+                <p>Upload Blink</p><br>
+                </section>
+
+                <section>
+                <p>Upload WiFiWebServer</p><br>
+                </section>
+
+                 <section>
+                <p>Connect an potentiometer</p><br>
+                <img src="img/pot.png"><br>
+                </section>
+
+                <section>
+                <p>Upload mqtt_ard_mqtt_sensor</p><br>
+                </section>
+                
+
+
+
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [{
+            src: 'lib/js/classList.js',
+            condition: function() {
+                return !document.body.classList;
+            }
+        }, {
+            src: 'plugin/markdown/marked.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        }, {
+            src: 'plugin/markdown/markdown.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        }, {
+            src: 'plugin/highlight/highlight.js',
+            async: true,
+            condition: function() {
+                return !!document.querySelector('pre code');
+            },
+            callback: function() {
+                hljs.initHighlightingOnLoad();
+            }
+        }, {
+            src: 'plugin/zoom-js/zoom.js',
+            async: true
+        }, {
+            src: 'plugin/notes/notes.js',
+            async: true
+        }]
+    });
+    </script>
+</body>
+
+</html>
