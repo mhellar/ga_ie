@@ -41,9 +41,9 @@
     <script src="js/stats.min.js"></script>
     <script src='//code.jquery.com/jquery-1.7.2.min.js'></script>
     <script src='//localhost:3000/socket.io/socket.io.js'></script>
-    <script id="vertexShader" type="x-shader/x-vertex">
-        void main() { gl_Position = vec4( position, 1.0 ); }
-    </script>
+<script id="vertexShader" type="x-shader/x-vertex">
+    void main() { gl_Position = vec4( position, 1.0 ); }
+</script>
 
 <script id="fragmentShader" type="x-shader/x-fragment">
 
@@ -125,6 +125,7 @@ function map_range(value, low1, high1, low2, high2) {
         scene = new THREE.Scene();
 
         var geometry = new THREE.PlaneBufferGeometry(2, 2);
+
 
         uniforms = {
             time: {

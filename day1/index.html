@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Internet of things: Week 5</title>
+    <title>IInteractive Environments: Day 1</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -84,6 +84,10 @@
 
                     </section>
 
+                    <section>
+                    <a href="http://jsonviewer.stack.hu/">Online JSON Viewer</a>
+                    </section>
+
             </section>
             
             <section>
@@ -93,13 +97,6 @@
                         <a href="#" class="navigate-down">
                         </a>
                 </section>
-                <section>                    
-                        <h4>Creating an Interactive Shader</h4>
-                        <p>In the code folder 'cd' to the shaders folder</p><br>
-                        <p>run http-server</p>
-                        
-                </section>
-
                 <section>                    
                         <h4>Creating an Interactive Shader</h4>
                         <p>In the code folder 'cd' to the shaders folder</p><br>
@@ -132,9 +129,6 @@
                         <p>http://nodeschool.io/</p>   
                 </section>
 
-                <section>
-
-</section>
                     <section>                    
                         <h4>Creating an Interactive Shader</h4>
                         <p>Connect a potentiometer</p>
@@ -156,30 +150,48 @@
                       
                 </section>
     
+                    <section>                    
+                        <h4>sudo npm install n -g</h4>
+                        <p>n 0.12.0</p>
+                      
+                </section>
+    
                 <section>                    
                         <h4>Creating an Interactive Shader</h4>
                         <p>1: Upload AnalogInOutSerial.ino to arduino from AnalogInOutSerial in the code folder</p><br>
 
-                        <p>2: Note the serial port under tools->ports in Arduino</p><br>
+                        <p>2: Note the serial port under tools->ports in Arduino and update that in index.js</p><br>
 
-                        <p>3: Run node index.js from the serialbasic from serialbasic in the code folder</p>
+                        <p>3: cd serialbasic && npm install</p>
+
+                        <p>4: Run node index.js from the serialbasic from serialbasic in the code folder</p>
                   
                         </a>
                 </section>
                 <section>                    
                         <h4>Creating an Interactive Shader</h4>
-                        <p>1: Run node index.js from the serial_shader in the code folder</p><br>
-                        <p>2: Open web browser go to <a href="http://localhost:3000"></a>http://localhost:3000</p>
+                        <p>1: cd serial_shader && npm install</p>
+
+                        <p>2: Note the serial port under tools->ports in Arduino and update that in index.js</p><br>
+
+                        <p>3: Run node index.js from the serial_shader in the code folder</p><br>
+                        <p>4: Open web browser go to <a href="http://localhost:3000"></a>http://localhost:3000</p>
                         </a>
                 </section>
-
-                <section>                    
-                        <h4>Creating an Interactive Shader</h4>
-                        <p>1: Run node index.js from the serial_shader in the code folder</p><br>
-                        <p>2: Open web browser go to <a href="http://localhost:3000"></a>http://localhost:3000</p>
-                        </a>
+                <section>
+                <a href="https://www.opengl.org/sdk/docs/tutorials/ClockworkCoders/uniform.php">Uniform Variables</a>
                 </section>
 
+                <section>
+                <a href="http://threejs.org/docs/#Reference/Materials/ShaderMaterial">The ThreeJS Shader Material allows us to create Uniform Variables which we can talk to in Javascript</a>
+                </section>
+
+                <section>
+                <p>Index.html</p>
+                <p>On line 96 we recieve our websocket data</p>
+                <p>On line 130 we recieve our websocket define our Uniform Varialbes</p>
+                <p>On line 189 we assign the value of our incoming websocket to our uniform variable in the render loop which passes the value to the shader</p>
+                </section>
 
                 </section>
 
@@ -401,9 +413,6 @@ var client = new Twitter({
                     <br>
                     <h2 class="intro">'node app.js'</h2>
                 </section>
-            </section>
-            <section>
-            <h1>NeoPixels</h1>
             </section>
 
 
