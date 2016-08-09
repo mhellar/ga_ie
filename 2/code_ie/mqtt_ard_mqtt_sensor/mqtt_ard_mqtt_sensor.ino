@@ -31,6 +31,10 @@
 #define AIO_USERNAME    ""
 #define AIO_KEY         ""
 
+#define BUTTON          4
+int current = 0;
+int last = -1;
+
 /************ Global State (you don't need to change this!) ******************/
 
 // Create an ESP8266 WiFiClient class to connect to the MQTT server.
@@ -67,7 +71,7 @@ void MQTT_connect();
 void setup() {
   Serial.begin(115200);
   delay(10);
-
+  pinMode(BUTTON, INPUT_PULLUP);
   Serial.println(F("Adafruit MQTT demo"));
 
   // Connect to WiFi access point.
@@ -112,12 +116,31 @@ void loop() {
   Serial.print(F("\nSending pot val "));
   Serial.print(x);
   Serial.print("...");
-  if (! photocell.publish(analogRead(A0))) {
-    Serial.println(F("Failed"));
-  } else {
-    Serial.println(F("OK!"));
-  }
 
+
+  // grab the current state of the button
+  current = digitalRead(BUTTON);
+
+  // return if the value hasn't changed
+  if(current == last)
+    return;
+
+  int32_t value = (current == LOW ? 1 : 0);
+
+  // Now we can publish stuff!
+  Serial.print(F("\nSending button value: "));
+  Serial.print(value);
+  Serial.print("... ");
+
+  if (! button.publish(value))
+    Serial.println(F("Failed."));
+  else
+    Serial.println(F("Success!"));
+
+  // save the button state
+  last = current;
+
+}
   // ping the server to keep the mqtt connection alive
   // NOT required if you are publishing once every KEEPALIVE seconds
   /*

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Shader 1</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				color: #ffffff;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+				font-weight: bold;
+
+				background-color: #000000;
+				margin: 0px;
+				overflow: hidden;
+			}
+
+			#info {
+				position: absolute;
+				top: 0px; width: 100%;
+				padding: 5px;
+			}
+
+			a {
+
+				color: #ffffff;
+			}
+
+			#oldie a { color:#da0 }
+		</style>
+	</head>
+	<body>
+
+		<div id="container"></div>
+
+    <script src="js/three.min.js"></script>
+    <script src="js/Detector.js"></script>
+    <script src="js/stats.min.js"></script>
+    <script src='//code.jquery.com/jquery-1.7.2.min.js'></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+        void main() { gl_Position = vec4( position, 1.0 ); }
+    </script>
+
+		<script id="vertexShader" type="x-shader/x-vertex">
+
+			void main()	{
+
+				gl_Position = vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+		<script id="fragmentShader" type="x-shader/x-fragment">
+
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform float time;
+uniform vec2 mouse;
+uniform vec2 resolution;
+
+// Changing Lines 2016-07-10 by @hintz
+
+void main(void)
+{
+	vec2 position = gl_FragCoord.xy / resolution.yy - 0.5;
+	
+	float x = position.x + cos(time * 0.01);
+	float y = position.y + sin(time * 0.01);
+
+	float color = 0.0;
+	float color2;
+	
+	for (int i = 0; i < 3; i++)
+	{
+		float n = pow(1.1, float(i));
+		float t = time + n;
+		
+		color2 = color;
+		
+		color += sin(n * (cos(t * 0.04) * y + sin(t * 0.04)*x) * 20.0) + sin(n * (cos(t * 0.04) * x - sin(t * 0.04) * y) * 20.0);
+		color *= sin((x + t * 0.028) * 3.1) + cos((y + t * 0.028) * 3.1);
+		
+		x -= 0.1;
+		color += cos(n * (cos(t * 0.05) * y - sin(t * 0.05)*x) * 20.0) + cos(n * (cos(t * 0.05) * x + sin(t * 0.05) * y) * 20.0);
+	}
+	
+	color = 1.0 - pow(color, 0.5);
+	color2 = color * pow(color2, 0.3);
+
+	
+	gl_FragColor = vec4(color2 * color - sin(time * 0.9 + color), color2 * color - cos(time + color * 3.0 * x) * cos(time), color2 * sin(time + color * 3.0 * y), 1.0);
+}
+		</script>
+
+		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			var container, stats;
+
+			var camera, scene, renderer;
+
+			var uniforms;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.getElementById( 'container' );
+
+				camera = new THREE.Camera();
+				camera.position.z = 1;
+
+				scene = new THREE.Scene();
+
+				var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+
+				uniforms = {
+					time: { type: "f", value: 1.0 },
+					resolution: { type: "v2", value: new THREE.Vector2() }
+				};
+
+				var material = new THREE.ShaderMaterial( {
+
+					uniforms: uniforms,
+					vertexShader: document.getElementById( 'vertexShader' ).textContent,
+					fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+
+				} );
+
+				var mesh = new THREE.Mesh( geometry, material );
+				scene.add( mesh );
+
+				renderer = new THREE.WebGLRenderer();
+				container.appendChild( renderer.domElement );
+
+				stats = new Stats();
+				stats.domElement.style.position = 'absolute';
+				stats.domElement.style.top = '0px';
+				container.appendChild( stats.domElement );
+
+				onWindowResize();
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize( event ) {
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				uniforms.resolution.value.x = renderer.domElement.width;
+				uniforms.resolution.value.y = renderer.domElement.height;
+
+			}
+
+			//
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				render();
+				stats.update();
+
+			}
+
+			function render() {
+
+				uniforms.time.value += 0.05;
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+
+	</body>
+</html>

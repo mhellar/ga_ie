@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bart Predictor</title>
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+</head>
+<body>
+<script>
+var socket = io.connect('//localhost:3000');
+    //Recieve train data
+    socket.on('mysocket', function(data) {
+        console.log(data);
+        $('#incoming').text(data);
+
+    });
+    //Recieve station color
+    socket.on('traincolor', function(data) {
+        console.log(data);
+        //set background color
+        $('body').css('background', data);
+
+    });
+
+    socket.on('error', function() {
+        console.error(arguments)
+    });
+</script>
+<h1>24th Street Bart Station </h1><br>
+<h1 id="incoming"></h1>
+</body>
+</html>
