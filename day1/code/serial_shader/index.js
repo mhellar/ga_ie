@@ -21,7 +21,9 @@ serialPort.on('open', function() {
 });
 
 serialPort.on('data', function(data) {
-    io.sockets.emit('data', data);
+
+    io.sockets.emit('mysocket', data);
+    
     console.log(data);
 });
 

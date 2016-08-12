@@ -39,14 +39,90 @@
     <script src="js/Detector.js"></script>
     <script src="js/stats.min.js"></script>
     <script src='//code.jquery.com/jquery-1.7.2.min.js'></script>
-
+<!-- 
     <script id="vertexShader" type="x-shader/x-vertex">
         void main() { gl_Position = vec4( position, 1.0 ); }
-    </script>
+    </script> -->
+
+    
+		<script id="surfaceVertexShader" type="x-shader/x-vertex">
+
+			attribute vec3 position;
+			attribute vec2 surfacePosAttrib;
+			varying vec2 surfacePosition;
+
+			void main() {
+
+				surfacePosition = surfacePosAttrib;
+				gl_Position = vec4( position, 1.0 );
+
+			}
+
+		</script>
 
 		<script id="fragmentShader" type="x-shader/x-fragment">
-//Paste Shader Code Here
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+#define PI 3.1415926535897932384626433832795
+
+uniform float time;
+uniform vec2 resolution;
+uniform vec2 mouse;
+varying vec2 surfacePosition;
+uniform sampler2D backbuffer;
+
+#define time (time/12.)
+
+
+const float position = 0.0;
+float scale = 2.5;
+const float intensity = 1.;
+
+float band(vec2 pos, float amplitude, float frequency) {
+	float wave = scale * amplitude * sin(2.0 * PI * frequency * pos.x + time/8.-pos.x*pos.x*0.125) / 2.05;
+	float light = clamp(amplitude * frequency * 0.02, 0.01 + 0.01 / scale, 5.0) * scale / abs(wave - pos.y);
+	return light;
+}
+
+vec2 vvn(int u,int v) {
+	return vec2( u, v ) * 20.0*(surfacePosition.y)*sin(time*1.0);
+}
+
+void main( void ) {
+	vec2 surfacePosition = surfacePosition * 4.;
+	float dp  = 7.*dot(surfacePosition,surfacePosition);
+	vec2 SP = mix( surfacePosition.xy * (1.0-dp*0.3), surfacePosition.xy / (1.0-dp*0.3), 1.+0.01*cos(time)*cos(time+dp*100.)*cos(time) );
+	SP = vec2(SP.x * -2., SP.y);
+	SP = SP.yx*vec2(-6,1.5)+vec2(4.,0);
+	SP *= 0.4;
+	
+	vec3 color = vec3(.1,.16,.18);
+	color = color == vec3(01.0)? vec3(0.5, 0.5, 1.0) : color;
+	vec2 pos = SP;
+	float spectrum = 0.0;
+	const float lim = 20.;
+	float tt = 3e5 + pos.x*3.1415;
+	float pt = 0.20;
+	float st = sin(tt*0.150);
+	for(float i = 0.; i < lim; i++){
+		spectrum += band(pos, 1.90*st, 1.10*sin(tt*i/lim))/pow(lim, pt);
+	}
+	gl_FragColor = vec4(color * pow(spectrum, length(color)*2.), 1.);
+	
+	#define t2(d) (texture2D(backbuffer, fract((d+gl_FragCoord.xy)/resolution))-1./256.)
+	#define t3(d) ((t2(d+vvn(1,0))+t2(d+vvn(-1,0))+t2(d+vvn(0,1))+t2(d+vec2(0,-1)))/4.01)
+	#define t4(d) ((t3(d+vvn(2,0))+t3(d+vvn(-2,0))+t3(d+vvn(0,2))+t3(d+vec2(0,-2)))/4.02)
+	#define t5(d) ((t4(d+vvn(3,0))+t4(d+vvn(-3,0))+t4(d+vvn(0,3))+t4(d+vec2(0,-3)))/4.03)
+	
+	gl_FragColor = max(gl_FragColor, t5(vec2((pos.y*3.),cos(time/5.))));
+	
+	
+	
+}
 		</script>
+
 
 		<script>
 

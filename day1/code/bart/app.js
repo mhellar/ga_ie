@@ -10,6 +10,7 @@ var express = require('express');
 //create express object named app
 var app = express();
 
+
 //instantiate a server on port 3000
 var server = app.listen(3000);
 var io = require('socket.io')(server);
@@ -18,7 +19,8 @@ var io = require('socket.io')(server);
 app.use(express.static('public'));
 
 //create a bart oobject that queries the API every 5 seconds
-var bart = require('bart').createClient({"interval":20000});
+var bart = require('bart').createClient({"interval":5000});
+
 
 //let's make a function that speaks
 function speak(whatosay){
@@ -33,21 +35,24 @@ app.get('/', function(req, res) {
 
 
 
-function queryBart(){
+function queryBart(station){
 //choose which bart staion to to monitor, station abbreviations are here: http://api.bart.gov/docs/overview/abbrev.aspx
-bart.on('24th', function(estimates){
+bart.on(station, function(estimates){
    //log the results to the console
    console.log(estimates);    
    // store the results in some variables
    var nextTrainNorth = "Next train in " + estimates[0].minutes;
-   var destSouth = "Dest: " + estimates[0].destination;
+   // var destSouth = "Dest: " + estimates[0].destination;
    io.sockets.emit('mysocket',nextTrainNorth + " minutes" + " destination is " + estimates[0].destination + " direction is " + estimates[0].direction);
    //Trasmit Station Color
+
    io.sockets.emit('traincolor',estimates[0].hexcolor);
    // call the function
    speak(nextTrainNorth + " minutes" + " destination is " + estimates[0].destination + " Direction is " + estimates[0].direction);
    }, 1000);
 }
 
-queryBart();
+queryBart('24th');
+
+queryBart('dbrk');
 
