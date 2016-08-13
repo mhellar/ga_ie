@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+    <script src='//code.jquery.com/jquery-1.7.2.min.js'></script>
+    <script src='//localhost:3000/socket.io/socket.io.js'></script>
+    <script>
+    var socket = io.connect('//localhost:3000');
+
+
+    socket.on('data', function(data) {
+        console.log(data);
+        $('#msg').text(data);
+    });
+    $(document).ready(function() {
+        $("#one").click(function() {
+            socket.emit('message', 'two');
+            socket.emit('message', 'one');
+            console.log("one");
+        });
+        $("#two").click(function() {
+            socket.emit('message', 'two');
+            console.log("two");
+        });
+        $("#three").click(function() {
+            socket.emit('message', 'three');
+            console.log("three");
+        });
+        $("#four").click(function() {
+            socket.emit('message', "four");
+            console.log("four");
+        });
+    });
+
+
+
+
+    socket.on('error', function() {
+        console.error(arguments)
+    });
+    socket.on('message', function() {
+        console.log(arguments)
+    });
+
+    </script>
+</head>
+
+<body>
+    <button type="button" class="btn btn-primary" id="one">Sequence 1</button>
+    <button type="button" class="btn btn-primary" id="two">Sequence 2</button>
+    <button type="button" class="btn btn-primary" id="three">Sequence 3</button>
+    <button type="button" class="btn btn-primary" id="four">Sequence 4</button>
+</body>
+
+</html>
