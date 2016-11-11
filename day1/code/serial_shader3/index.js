@@ -6,7 +6,7 @@ var server = app.listen(3000);
 app.use(express.static('public'));
 var io = require('socket.io')(server);
 
-var serialPort = new com.SerialPort("/dev/cu.usbmodem1421", {
+var serialPort = new com.SerialPort("/dev/cu.usbmodem1411", {
     baudrate: 9600,
     parser: com.parsers.readline('\n')
 });
