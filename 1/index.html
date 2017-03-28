@@ -91,6 +91,20 @@
                 <br>
             </section>
             <section>
+                <p>Upload ESPwebpage</p>
+                <br>
+            </section>
+            <section>
+                <p>Hook Up A Servo</p>
+                <br>
+                <img src="img/servoesp.png">
+            </section>
+            <section>
+                <p>Upload ESPwebpage</p>
+                <br>
+            </section>
+
+            <section>
                 <p>Connect some neopixels</p>
                 <br>
                 <img src="img/espixel.png">
@@ -110,7 +124,6 @@
             <section>
                 <p>brew install mosquitto</p><br>
                 <p>run mosquitto from terminal</p>
-
             </section>
             <section>
                 <p>Open 2 terminals</p><br>
@@ -120,14 +133,14 @@
 
             <section>
                 <p>Public MQTT Server</p><br>
-                <p>In the first type: mosquitto_sub -h ec2-35-161-110-220.us-west-2.compute.amazonaws.com -t /test</p><br>
-                <p>In the second type: mosquitto_pub -h ec2-35-161-110-220.us-west-2.compute.amazonaws.com -t /test -m "message"</p><br>
+                <p>In the first type: mosquitto_sub -h 35.167.192.176 -t /test</p><br>
+                <p>In the second type: mosquitto_pub -h 35.167.192.176 -t /test -m "message"</p><br>
             </section>
 
             <section>
                 <p>Install Arduino MQTT Library</p><br>
                 <p>Upload mqtt_neopixels</p><br>
-                <p>mosquitto_pub -h ec2-35-161-110-220.us-west-2.compute.amazonaws.com -t /test -m "1"</p><br>
+                <p>mosquitto_pub -h 35.167.192.176 -t /test -m "1"</p><br>
             </section>
 
             <section>
