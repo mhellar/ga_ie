@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
 });
 
 //Connect to server, Our device
-var oscServer = new osc.Server(8338, 'localhost');
+var oscServer = new osc.Server(8000, '192.168.8.185');
 
 //When we recieve a message send it as a web socket
 oscServer.on("message", function(msg, rinfo) {

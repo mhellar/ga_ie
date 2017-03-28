@@ -5,7 +5,7 @@ var server = app.listen(3000);
 var io = require('socket.io')(server);
 
 var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://ec2-35-161-110-220.us-west-2.compute.amazonaws.com');
+var client = mqtt.connect('mqtt://35.167.192.176');
 
 var say = 'say ';
 
@@ -31,15 +31,14 @@ client.on('message', function(topic, message) {
     console.log(message.toString());
     io.sockets.emit('data', message.toString());
     if(message.toString() === '1'){
-    speak("-v Agnes setting led to red");
+    // speak("-v Agnes setting led to red");
 }   else if(message.toString() === '2'){
-    speak("-v Daniel setting led to green");
+    // speak("-v Daniel setting led to green");
 }   else if(message.toString() === '3'){
-    speak("-v Ralph setting led to blue");
+    // speak("-v Ralph setting led to blue");
 }   else if(message.toString() === 'hello'){
-    speak("-v Zarvox greeting human");
+    // speak("-v Zarvox greeting human");
 }   else if(message.toString() === '5'){
-    speak("-v Fred Ryan is new media director");
 }
 });
 
