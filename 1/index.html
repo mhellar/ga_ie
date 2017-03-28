@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Interactive Environments</title>
-    <meta name="description" content="NodeJS Class 1">
+    <meta name="description" content="Interactive Environments 2">
     <meta name="author" content="Mark Hellar">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -15,157 +15,135 @@
     <link rel="stylesheet" href="lib/css/zenburn.css">
     <!-- Printing and PDF exports -->
     <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
     </script>
     <!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
 </head>
 
 <body>
     <div class="reveal">
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
-        <section>
-        Announcements!
+            <section data-background="img/nodemcu.png">
             </section>
             <section>
-        3D printer is Online
+                <p>The ESP8266</p>
+            </section>
+
+            <section>
+                <a href="http://bit.ly/2f1U0SU">Code</a>
+            </section>
+
+            <section>
+                <p>The ESP8266 is a low-cost Wi-Fi chip with full TCP/IP stack and MCU (Micro Controller Unit) capability produced by Shanghai-based Chinese manufacturer, Espressif Systems.</p>
+            </section>
+
+            <section>
+                <p>The NodeMCU is a mini Arduino with Wifi, that is $10.00!</p>
+                <br>
             </section>
             <section>
-        <h1>Good Entrypoints</h1><br>
-        <a href="https://www.tinkercad.com/">https://www.tinkercad.com/</a><br>
-        <a href="https://www.thingiverse.com//">https://www.thingiverse.com/</a>
-            </section>
-        <section>
-        <p>Special Wifi Network for this section:</p><br>
-        <p>name: decimator</p><br>
-        <p>pass: decimator</p>
-            </section>
-
-            <section data-background="img/janney01.jpg">
-            </section>
-            <section data-background="img/spacebrew-1.png">
-            </section>
-            <section data-background="img/IMG_0550-6.jpg">
-            </section>
-            
-            <section>
-                <section>
-                <h3>Slides for today are here:</h3><br>
-                <a href="http://mhellar.github.io/ga_ie/1">http://mhellar.github.io/ga_ie/1</a><br>
-                <h3>Code is here:</h3><br>
-                <a href="http://bit.ly/24zYuWD">http://bit.ly/24zYuWD</a><br>      
-                </section>
-
-                <section>
-                    <h3>Speaking to node with our phone</h3>
-                    <img src="img/osc.png" height="500">
-                </section>
-                <section>
-                    <h3>Set your phone to wifi 'decimator'</h3><br>
-                    <h3>password 'decimator'</h3><br>
-                </section>
-                <section>
-                    <h3>Open your system preferences, the click the network icon</h3>
-                    <img src="img/compip.png" height="500">
-                </section>
-                <section>
-                    <img src="img/touchosc1.png" height="600">
-                </section>
-                <section>
-                    <img src="img/touchosc2.png" height="600">
-                </section>
-                <section>
-                    <ul>
-                        <li>Make a new folder called osc</li>
-                        <li class="fragment">Open the terminal and type 'cd' + SPACE + drag folder onto the terminal</li>
-                        <li class="fragment">Type 'npm init'</li>
-                        <li class="fragment">Fill out the questions</li>
-                    </ul>
-                </section>
-                <section>
-                    <ul>
-                        <li>Drag the folder on to Sublime text</li>
-                        <li class="fragment">Type 'npm install node-osc --save'</li>
-                    </ul>
-                </section>
-            <section>
-                <ul>
-                    <li>Create a new file in Sublime</li>
-                    <li class="fragment">Enter the code below:</li>
-                    <li class="fragment">Change the port to your phones outgoing port and ip to phones IP</li>
-                    <li class="fragment">Save as 'index.js' in your new folder</li>
-                </ul>
-                <pre><code class="hljs" data-trim contenteditable width>
-var osc = require('node-osc');
-                
-var oscServer = new osc.Server(3333, '0.0.0.0');
-oscServer.on("message", function(msg, rinfo) {
-    console.log("TUIO message:");
-    console.log(msg);
-});
-
-					</code></pre>
-            </section>
+                <p>
+                    <a="https://github.com/esp8266/Arduino">ESP8266 core for Arduino</a>
+                </p>
             </section>
             <section>
-                    <ul>
-                        <li>Close the last program(CTRL+C X2)</li>
-                        <li class="fragment">CD to face_osc_ws</li>
-                        <li class="fragment">Type 'npm install'</li>
-                        <li class="fragment">Type 'node index.js'</li>
-                        <li class="fragment">Open your browser to http://localhost:3000</li>
-                    </ul>
-                </section>
-                <section>
-                    <section>
-                    <h1>FaceOSC</h1>
-                    <img src="img/faceosc.jpg" height="400">
-                </section>
-                    <section>
-                    <h1>Download the latest version from here:</h1>
-                    <a href="https://github.com/kylemcdonald/ofxFaceTracker/releases">https://github.com/kylemcdonald/ofxFaceTracker/releases</a>
-                </section>
-                <section>
-                    
-                    <ul>
-                        <li>Run FaceOSC</li>
-                        <li class="fragment">CD to face_osc_ws</li>
-                        <li class="fragment">Type 'npm install'</li>
-                        <li class="fragment">Type 'node index.js'</li>
-                        <li class="fragment">Open your browser to http://localhost:3000</li>
-                    </ul>
-                </section>
-                <section>
-                    
-                    <ul>
-                        <li>Close the last program(CTRL+C X2)</li>
-                        <li class="fragment">Try the processing examples in FaceOSC-Templates</li>
-                    </ul>
-                </section>
-                </section>
+                <p>
+                    Getting Set up:
+                    <br> - First install the USB driver <a href="https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx">SiLabs serial driver</a>
+                </p>
+            </section>
+            <section>
+                <p>
+                    Getting Set up:
+                    <br> - Next go to the Arduino Preferences
+                    <br><img src="img/ard-pref.png" height="400">
+                    <br> Enter <b>http://arduino.esp8266.com/stable/package_esp8266com_index.json</b> into Additional Boards Manager URLs
+                </p>
+            </section>
+            <section>
+                <p>
+                    Getting Set up:
+                    <br> - Next, use the Board manager to install the ESP8266 package.
+                    <br><img src="img/brdmgr.png" height="400">
+                </p>
+            </section>
+            <section>
+                <img src="img/nodemcu_pins.png">
+            </section>
+            <section>
+                <p>Connect an led</p>
+                <br>
+                <img src="img/mqled.png">
+            </section>
+            <section>
+                <p>Upload Blink</p>
+                <br>
+            </section>
+            <section>
+                <p>Upload WiFiWebServer</p>
+                <br>
+            </section>
+            <section>
+                <p>Connect some neopixels</p>
+                <br>
+                <img src="img/espixel.png">
+                <br>
+            </section>
 
-                <section>
-                <section data-background="img/huzzah.jpg">
-                </section>
-                <section>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/f95i88OSWB4" frameborder="0" allowfullscreen></iframe>
-                </section>
-                                <section>
-                <a href="https://learn.adafruit.com/adafruit-huzzah-esp8266-breakout/assembly">Assembly</a>
-                </section>
-                                 <section>
-                <a href="https://learn.adafruit.com/adafruit-huzzah-esp8266-breakout/using-arduino-ide">Set Up Arduino</a>
-                </section>
+            <section>
+                <br>
+                <img src="img/mqttorg.png">
+                <br>
+            </section>
+            <section>
+                <br>
+                <img src="img/mqtt-explanation.png">
+                <br>
+            </section>
+            <section>
+                <p>brew install mosquitto</p><br>
+                <p>run mosquitto from terminal</p>
 
-               
-    
-                </section>
+            </section>
+            <section>
+                <p>Open 2 terminals</p><br>
+                <p>In the first type: mosquitto_sub -h 127.0.0.1 -t topic</p><br>
+                <p>In the second type: mosquitto_pub -h 127.0.0.1 -t topic -m "message"</p><br>
+            </section>
+
+            <section>
+                <p>Public MQTT Server</p><br>
+                <p>In the first type: mosquitto_sub -h ec2-35-161-110-220.us-west-2.compute.amazonaws.com -t /test</p><br>
+                <p>In the second type: mosquitto_pub -h ec2-35-161-110-220.us-west-2.compute.amazonaws.com -t /test -m "message"</p><br>
+            </section>
+
+            <section>
+                <p>Install Arduino MQTT Library</p><br>
+                <p>Upload mqtt_neopixels</p><br>
+                <p>mosquitto_pub -h ec2-35-161-110-220.us-west-2.compute.amazonaws.com -t /test -m "1"</p><br>
+            </section>
+
+            <section>
+                <p>cd ws_mqtt_express, run node index.js</a>
+                </p>
+            </section>
+
+            <section>
+                <p>cd speak_mqtt, run node index.js</a>
+                </p>
+            </section>
+
+            <section>
+                <p><a href="http://www.blynk.cc/">Blynk</a></p>
+            </section>
+
 
 
         </div>
@@ -173,49 +151,49 @@ oscServer.on("message", function(msg, rinfo) {
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.js"></script>
     <script>
-    // Full list of configuration options available at:
-    // https://github.com/hakimel/reveal.js#configuration
-    Reveal.initialize({
-        controls: true,
-        progress: true,
-        history: true,
-        center: true,
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
 
-        transition: 'convex', // none/fade/slide/convex/concave/zoom
+            transition: 'convex', // none/fade/slide/convex/concave/zoom
 
-        // Optional reveal.js plugins
-        dependencies: [{
-            src: 'lib/js/classList.js',
-            condition: function() {
-                return !document.body.classList;
-            }
-        }, {
-            src: 'plugin/markdown/marked.js',
-            condition: function() {
-                return !!document.querySelector('[data-markdown]');
-            }
-        }, {
-            src: 'plugin/markdown/markdown.js',
-            condition: function() {
-                return !!document.querySelector('[data-markdown]');
-            }
-        }, {
-            src: 'plugin/highlight/highlight.js',
-            async: true,
-            condition: function() {
-                return !!document.querySelector('pre code');
-            },
-            callback: function() {
-                hljs.initHighlightingOnLoad();
-            }
-        }, {
-            src: 'plugin/zoom-js/zoom.js',
-            async: true
-        }, {
-            src: 'plugin/notes/notes.js',
-            async: true
-        }]
-    });
+            // Optional reveal.js plugins
+            dependencies: [{
+                src: 'lib/js/classList.js',
+                condition: function() {
+                    return !document.body.classList;
+                }
+            }, {
+                src: 'plugin/markdown/marked.js',
+                condition: function() {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            }, {
+                src: 'plugin/markdown/markdown.js',
+                condition: function() {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            }, {
+                src: 'plugin/highlight/highlight.js',
+                async: true,
+                condition: function() {
+                    return !!document.querySelector('pre code');
+                },
+                callback: function() {
+                    hljs.initHighlightingOnLoad();
+                }
+            }, {
+                src: 'plugin/zoom-js/zoom.js',
+                async: true
+            }, {
+                src: 'plugin/notes/notes.js',
+                async: true
+            }]
+        });
     </script>
 </body>
 
