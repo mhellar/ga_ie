@@ -1,32 +1,6 @@
 // This example uses an Adafruit Huzzah ESP8266
 // to connect to an mqtt server.
 //
-
-
-#include <ESP8266WiFi.h>
-#include <MQTTClient.h>
-
-/***************************************************
-  Adafruit MQTT Library ESP8266 Example
-
-  Must use ESP8266 Arduino from:
-    https://github.com/esp8266/Arduino
-
-  Works great with Adafruit's Huzzah ESP board & Feather
-  ----> https://www.adafruit.com/product/2471
-  ----> https://www.adafruit.com/products/2821
-
-  Adafruit invests time and resources providing this open source code,
-  please support Adafruit and open-source hardware by purchasing
-  products from Adafruit!
-
-  Written by Tony DiCola for Adafruit Industries.
-  MIT license, all text above must be included in any redistribution
- ****************************************************/
-#include <ESP8266WiFi.h>
-#include "Adafruit_MQTT.h"
-#include "Adafruit_MQTT_Client.h"
-
 #include <Adafruit_NeoPixel.h>
 #ifdef __AVR__
   #include <avr/power.h>
@@ -41,14 +15,23 @@
 //   NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
 //   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
 //   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
-Adafruit_NeoPixel strip = Adafruit_NeoPixel(12, PIN, NEO_GRB + NEO_KHZ800);
+//   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(8, PIN, NEO_GRB + NEO_KHZ800);
+
+#include <ESP8266WiFi.h>
+#include <MQTTClient.h>
 
 //set wifi settings here
-const char *ssid = "wired";
-const char *pass = "12!trout";
+const char *ssid = "extreme";
+const char *pass = "extreme!!!";
 
+
+//const char* ssid = "A phone has no name";
+//const char* pass = "12345678";
 WiFiClient net;
 MQTTClient client;
+
+int seq;
 
 unsigned long lastMillis = 0;
 
@@ -57,8 +40,9 @@ void connect(); // <- predefine connect() for setup()
 void setup() {
   Serial.begin(9600);
   WiFi.begin(ssid, pass);
-  client.begin("ec2-35-161-110-220.us-west-2.compute.amazonaws.com", net);
+  client.begin("35.167.192.176", net);
   connect();
+
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
 }
@@ -88,12 +72,27 @@ void loop() {
   if(!client.connected()) {
     connect();
   }
+    // send the 'leds' array out to the actual LED strip
+  if(seq == 1){
+    colorWipe(strip.Color(255, 0, 0), 50); // Red
+  }else if(seq == 2){
+    colorWipe(strip.Color(0, 255, 0), 50); // Green
+  }else if(seq == 3){
+    colorWipe(strip.Color(0, 0, 255), 50); // Blue
+  }else if(seq == 4){
+    theaterChase(strip.Color(127, 127, 127), 10); // White
+  }else if(seq == 5){
+    theaterChase(strip.Color(127, 0, 0), 10); // Red
+  }else if(seq == 6){
+    theaterChase(strip.Color(0, 0, 127), 50); // Blue
+  }else if(seq == 7){
+    rainbow(10);
+  }else if(seq == 8){
+    rainbowCycle(10);
+  }else if(seq == 9){
+    theaterChaseRainbow(10);
+  }
 
-  // publish a message roughly every second.
-//  if(millis() - lastMillis > 1000) {
-//    lastMillis = millis();
-//    client.publish("/hello", "world");
-//  }
 }
 
 void messageReceived(String topic, String payload, char * bytes, unsigned int length) {
@@ -102,20 +101,9 @@ void messageReceived(String topic, String payload, char * bytes, unsigned int le
   Serial.print(" - ");
   Serial.print(payload);
   Serial.println();
-  if(payload == "1"){
-  colorWipe(strip.Color(255, 0, 0), 50); // red
-  }else if(payload == "2"){
-  colorWipe(strip.Color(0, 255, 0), 50); // green
-  }else if(payload == "3"){
-  colorWipe(strip.Color(255, 0, 0), 50); // Blue
-  }else if(payload == "4"){
-  rainbow(3);
-  }else if(payload == "4"){
-  theaterChase(strip.Color(0, 0, 127), 50);
-  }
 
-  
-  
+  int val = payload.toInt();
+  seq = val;
 }
 
 // Fill the dots one after the other with a color
@@ -156,14 +144,14 @@ void rainbowCycle(uint8_t wait) {
 void theaterChase(uint32_t c, uint8_t wait) {
   for (int j=0; j<10; j++) {  //do 10 cycles of chasing
     for (int q=0; q < 3; q++) {
-      for (int i=0; i < strip.numPixels(); i=i+3) {
+      for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
         strip.setPixelColor(i+q, c);    //turn every third pixel on
       }
       strip.show();
 
       delay(wait);
 
-      for (int i=0; i < strip.numPixels(); i=i+3) {
+      for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
         strip.setPixelColor(i+q, 0);        //turn every third pixel off
       }
     }
@@ -174,14 +162,14 @@ void theaterChase(uint32_t c, uint8_t wait) {
 void theaterChaseRainbow(uint8_t wait) {
   for (int j=0; j < 256; j++) {     // cycle all 256 colors in the wheel
     for (int q=0; q < 3; q++) {
-      for (int i=0; i < strip.numPixels(); i=i+3) {
+      for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
         strip.setPixelColor(i+q, Wheel( (i+j) % 255));    //turn every third pixel on
       }
       strip.show();
 
       delay(wait);
 
-      for (int i=0; i < strip.numPixels(); i=i+3) {
+      for (uint16_t i=0; i < strip.numPixels(); i=i+3) {
         strip.setPixelColor(i+q, 0);        //turn every third pixel off
       }
     }
@@ -202,3 +190,5 @@ uint32_t Wheel(byte WheelPos) {
   WheelPos -= 170;
   return strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
 }
+
+

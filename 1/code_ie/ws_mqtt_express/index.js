@@ -1,5 +1,3 @@
-
-
 var app = require('express')();
 
 var server = app.listen(3000);
@@ -7,7 +5,7 @@ var io = require('socket.io')(server);
 
 
 var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://ec2-35-161-110-220.us-west-2.compute.amazonaws.com');
+var client = mqtt.connect('mqtt://35.167.192.176');
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
@@ -32,7 +30,3 @@ io.on('connection', function(socket) {
         client.publish('/test', msg);
     });
 });
-
-
-
-

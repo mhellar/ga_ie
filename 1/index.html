@@ -100,47 +100,63 @@
                 <img src="img/servoesp.png">
             </section>
             <section>
-                <p>Upload ESPwebpage</p>
+                <p>Upload ESPwebpageServo</p>
                 <br>
             </section>
-
-            <section>
-                <p>Connect some neopixels</p>
-                <br>
-                <img src="img/espixel.png">
-                <br>
-            </section>
-
             <section>
                 <br>
                 <img src="img/mqttorg.png">
                 <br>
             </section>
+
             <section>
                 <br>
                 <img src="img/mqtt-explanation.png">
                 <br>
             </section>
             <section>
-                <p>brew install mosquitto</p><br>
-                <p>run mosquitto from terminal</p>
+                <p>I've set up a public MQTT server we will use in class</p><br>
+                <p>On Thurs I will show you how to set up your own on Amazon</p>
             </section>
             <section>
-                <p>Open 2 terminals</p><br>
-                <p>In the first type: mosquitto_sub -h 127.0.0.1 -t topic</p><br>
-                <p>In the second type: mosquitto_pub -h 127.0.0.1 -t topic -m "message"</p><br>
-            </section>
-
-            <section>
-                <p>Public MQTT Server</p><br>
-                <p>In the first type: mosquitto_sub -h 35.167.192.176 -t /test</p><br>
-                <p>In the second type: mosquitto_pub -h 35.167.192.176 -t /test -m "message"</p><br>
+                <p>MQTT.fx is a client that we can test the server with, this will demontrate the concept</p><br>
+                <p>http://www.mqttfx.org/</p>
             </section>
 
             <section>
-                <p>Install Arduino MQTT Library</p><br>
-                <p>Upload mqtt_neopixels</p><br>
-                <p>mosquitto_pub -h 35.167.192.176 -t /test -m "1"</p><br>
+                <p>Set Up MQTT.FX to connect to the Public Server</p>
+                <img src="img/mqttfxsetup.png"><br>
+                <p>Click on the gear next to the connect button</p>
+            </section>
+            <section>
+                <p>Set Up MQTT.FX to connect to the Public Server</p>
+                <img src="img/mqttfxsetup2.png" height="400"><br>
+                <p>Make a new conection with the following settings, use your name as the client name, hit 'ok'</p>
+            </section>
+            <section>
+                <p>MQTT topics are like chat rooms, here I am publishing the message 'hi' to the topic "/test"</p>
+                <img src="img/mqtt_pub.png" height="400"><br>
+            </section>
+            <section>
+                <p>And here I am subscribing to the mesages on that topic</p>
+                <img src="img/mqtt_sub.png" height="400"><br>
+            </section>
+            <section>
+                <p>We can connect our ESP8266 to the MQTT server</p>
+                <br>
+                <p>Connect some neopixels</p>
+                <br>
+                <img src="img/espixel.png">
+                <br>
+            </section>
+            <section>
+                <p>Install Arduino MQTT Library by Joel Gaewiller</p><br>
+                <p>Upload espmqtt_neopixel</p><br>
+            </section>
+
+            <section>
+                <p>A note on MQTT topics</p><br>
+                <a href="https://mosquitto.org/man/mqtt-7.html">https://mosquitto.org/man/mqtt-7.html</a>
             </section>
 
             <section>

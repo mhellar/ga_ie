@@ -18,8 +18,8 @@
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(12, PIN, NEO_GRB + NEO_KHZ800);
 
-const char *ssid = "wired";
-const char *pass = "12!trout";
+const char *ssid = "extreme";
+const char *pass = "extreme!!!";
 
 int seq;
 
