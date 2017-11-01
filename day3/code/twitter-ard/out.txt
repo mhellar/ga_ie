@@ -1,2 +1,0 @@
-1470970570501 Device(s) /dev/cu.usbmodem1411  
-1470970570509 Connected /dev/cu.usbmodem1411  
